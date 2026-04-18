@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../data/fish_repository.dart';
+import '../../data/models/closed_season.dart';
 import '../../data/models/fish.dart';
 import '../../providers/zone_provider.dart';
 import '../../shared/utils/season_checker.dart';
@@ -176,34 +177,73 @@ class _InfoGrid extends StatelessWidget {
 
   const _InfoGrid({required this.fish, required this.zone});
 
+  String _formatMin(double? min) =>
+      min != null ? '${min.toInt()} cm' : 'Intet mindstemål';
+
+  String _formatSeasons(List<ClosedSeason> seasons) {
+    if (seasons.isEmpty) return 'Ingen';
+    return seasons
+        .map((cs) => du.formatClosedSeasonRange(
+            cs.startMonth, cs.startDay, cs.endMonth, cs.endDay))
+        .join(', ');
+  }
+
   @override
   Widget build(BuildContext context) {
-    final minSize = switch (zone) {
-      FishingZone.nordsoeSkagerrak => fish.minimumSizeCm.nordsoeSkagerrak,
-      FishingZone.kattegatBaelterOestersoe =>
-        fish.minimumSizeCm.kattegatBaelterOestersoe,
-      FishingZone.ferskvand => fish.minimumSizeCm.ferskvand,
-    };
+    final hasSalt = fish.environment.contains('salt');
+    final hasFresh = fish.environment.contains('fresh');
+    final hasBoth = hasSalt && hasFresh;
 
-    final closedSeasonText = fish.closedSeason.isEmpty
-        ? 'Ingen'
-        : fish.closedSeason
-            .map((cs) => du.formatClosedSeasonRange(
-                cs.startMonth, cs.startDay, cs.endMonth, cs.endDay))
-            .join(', ');
+    final saltMin = zone == FishingZone.nordsoeSkagerrak
+        ? fish.minimumSizeCm.nordsoeSkagerrak
+        : fish.minimumSizeCm.kattegatBaelterOestersoe;
+    final freshMin = fish.minimumSizeCm.ferskvand;
+
+    final saltSeasons = fish.closedSeason
+        .where((cs) => cs.zone == 'salt' || cs.zone == 'all')
+        .toList();
+    final freshSeasons = fish.closedSeason
+        .where((cs) => cs.zone == 'ferskvand' || cs.zone == 'all')
+        .toList();
 
     return Column(
       children: [
-        _InfoRow(
-          icon: Icons.straighten,
-          label: 'Mindstemål',
-          value: minSize != null ? '${minSize.toInt()} cm' : 'Intet mindstemål',
-        ),
-        _InfoRow(
-          icon: Icons.event_busy,
-          label: 'Fredningstid',
-          value: closedSeasonText,
-        ),
+        if (hasBoth) ...[
+          _InfoRow(
+            icon: Icons.straighten,
+            label: 'Mindstemål saltvand',
+            value: _formatMin(saltMin),
+          ),
+          _InfoRow(
+            icon: Icons.straighten,
+            label: 'Mindstemål ferskvand',
+            value: _formatMin(freshMin),
+          ),
+        ] else
+          _InfoRow(
+            icon: Icons.straighten,
+            label: 'Mindstemål',
+            value: hasSalt ? _formatMin(saltMin) : _formatMin(freshMin),
+          ),
+        if (hasBoth) ...[
+          _InfoRow(
+            icon: Icons.event_busy,
+            label: 'Fredningstid saltvand',
+            value: _formatSeasons(saltSeasons),
+          ),
+          _InfoRow(
+            icon: Icons.event_busy,
+            label: 'Fredningstid ferskvand',
+            value: _formatSeasons(freshSeasons),
+          ),
+        ] else
+          _InfoRow(
+            icon: Icons.event_busy,
+            label: 'Fredningstid',
+            value: hasSalt
+                ? _formatSeasons(saltSeasons)
+                : _formatSeasons(freshSeasons),
+          ),
         _InfoRow(
           icon: Icons.numbers,
           label: 'Dagkvote',
