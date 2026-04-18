@@ -7,25 +7,14 @@
     "image_asset": "assets/fish/havørred.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 40,
-      "kattegat_bælter_østersø": 40,
+      "nordsoen": 40,
+      "skagerrak_kattegat": 40,
+      "bælter_østersø": 40,
       "ferskvand": 40
     },
     "closed_season": [
-      {
-        "start_month": 11,
-        "start_day": 16,
-        "end_month": 1,
-        "end_day": 15,
-        "zone": "salt"
-      },
-      {
-        "start_month": 11,
-        "start_day": 16,
-        "end_month": 2,
-        "end_day": 28,
-        "zone": "ferskvand"
-      }
+      { "start_month": 11, "start_day": 16, "end_month": 1, "end_day": 15, "zone": "salt" },
+      { "start_month": 11, "start_day": 16, "end_month": 2, "end_day": 28, "zone": "ferskvand" }
     ],
     "daily_limit": null,
     "notes": "Saltvand: fredet 16. nov – 15. jan (i yngledragt). Ferskvand: fredet 16. nov – 28./29. feb. Vadehavet og Bornholmske farvande: fredet 16. sep – 28./29. feb. Ringkøbing, Nissum og Stadil fjorde samt Von Å: totalfredet hele året.",
@@ -42,8 +31,9 @@
     "image_asset": "assets/fish/torsk.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 35,
-      "kattegat_bælter_østersø": 35,
+      "nordsoen": 35,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 35,
       "ferskvand": null
     },
     "closed_season": [],
@@ -61,25 +51,14 @@
     "image_asset": "assets/fish/gedde.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 60,
-      "kattegat_bælter_østersø": 60,
+      "nordsoen": 60,
+      "skagerrak_kattegat": 60,
+      "bælter_østersø": 60,
       "ferskvand": 60
     },
     "closed_season": [
-      {
-        "start_month": 4,
-        "start_day": 1,
-        "end_month": 5,
-        "end_day": 15,
-        "zone": "salt"
-      },
-      {
-        "start_month": 3,
-        "start_day": 15,
-        "end_month": 4,
-        "end_day": 30,
-        "zone": "ferskvand"
-      }
+      { "start_month": 4, "start_day": 1, "end_month": 5, "end_day": 15, "zone": "salt" },
+      { "start_month": 3, "start_day": 15, "end_month": 4, "end_day": 30, "zone": "ferskvand" }
     ],
     "daily_limit": null,
     "notes": "Saltvand: fredet 1. apr – 15. maj. Ferskvand: fredet 15. mar – 30. apr.",
@@ -93,25 +72,14 @@
     "image_asset": "assets/fish/laks.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 60,
-      "kattegat_bælter_østersø": 60,
+      "nordsoen": 60,
+      "skagerrak_kattegat": 60,
+      "bælter_østersø": 60,
       "ferskvand": 40
     },
     "closed_season": [
-      {
-        "start_month": 11,
-        "start_day": 16,
-        "end_month": 1,
-        "end_day": 15,
-        "zone": "salt"
-      },
-      {
-        "start_month": 11,
-        "start_day": 16,
-        "end_month": 2,
-        "end_day": 28,
-        "zone": "ferskvand"
-      }
+      { "start_month": 11, "start_day": 16, "end_month": 1, "end_day": 15, "zone": "salt" },
+      { "start_month": 11, "start_day": 16, "end_month": 2, "end_day": 28, "zone": "ferskvand" }
     ],
     "daily_limit": null,
     "notes": "Saltvand: mindstemål 60 cm, fredet 16. nov – 15. jan (i yngledragt). Ferskvand: mindstemål 40 cm, fredet 16. nov – 28./29. feb. Østersøen: kun fedtfinneklippet (udsat) laks — max 1 pr. dag. Vadehavet og visse vandløb: totalfredet.",
@@ -129,8 +97,9 @@
     "image_asset": "assets/fish/aborre.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 20,
-      "kattegat_bælter_østersø": 20,
+      "nordsoen": 20,
+      "skagerrak_kattegat": 20,
+      "bælter_østersø": 20,
       "ferskvand": null
     },
     "closed_season": [],
@@ -146,18 +115,13 @@
     "image_asset": "assets/fish/sandart.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": null,
-      "kattegat_bælter_østersø": null,
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
       "ferskvand": 50
     },
     "closed_season": [
-      {
-        "start_month": 5,
-        "start_day": 1,
-        "end_month": 5,
-        "end_day": 31,
-        "zone": "ferskvand"
-      }
+      { "start_month": 5, "start_day": 1, "end_month": 5, "end_day": 31, "zone": "ferskvand" }
     ],
     "daily_limit": null,
     "notes": null,
@@ -171,8 +135,9 @@
     "image_asset": "assets/fish/makrel.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 30,
-      "kattegat_bælter_østersø": 20,
+      "nordsoen": 30,
+      "skagerrak_kattegat": 20,
+      "bælter_østersø": 20,
       "ferskvand": null
     },
     "closed_season": [],
@@ -188,8 +153,9 @@
     "image_asset": "assets/fish/rødspætte.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 27,
-      "kattegat_bælter_østersø": 25,
+      "nordsoen": 27,
+      "skagerrak_kattegat": 27,
+      "bælter_østersø": 25,
       "ferskvand": null
     },
     "closed_season": [],
@@ -205,8 +171,9 @@
     "image_asset": "assets/fish/skrubbe.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 18,
-      "kattegat_bælter_østersø": 23,
+      "nordsoen": 18,
+      "skagerrak_kattegat": 21,
+      "bælter_østersø": 23,
       "ferskvand": null
     },
     "closed_season": [],
@@ -222,8 +189,9 @@
     "image_asset": "assets/fish/ål.svg",
     "free_tier": true,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 40,
-      "kattegat_bælter_østersø": 40,
+      "nordsoen": 40,
+      "skagerrak_kattegat": 40,
+      "bælter_østersø": 40,
       "ferskvand": 45
     },
     "closed_season": [],
@@ -241,18 +209,13 @@
     "image_asset": "assets/fish/bækørred.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": null,
-      "kattegat_bælter_østersø": null,
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
       "ferskvand": 30
     },
     "closed_season": [
-      {
-        "start_month": 11,
-        "start_day": 16,
-        "end_month": 2,
-        "end_day": 28,
-        "zone": "ferskvand"
-      }
+      { "start_month": 11, "start_day": 16, "end_month": 2, "end_day": 28, "zone": "ferskvand" }
     ],
     "daily_limit": null,
     "notes": "Fredet 16. nov – 28./29. feb.",
@@ -266,18 +229,13 @@
     "image_asset": "assets/fish/søørred.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": null,
-      "kattegat_bælter_østersø": null,
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
       "ferskvand": 40
     },
     "closed_season": [
-      {
-        "start_month": 11,
-        "start_day": 16,
-        "end_month": 2,
-        "end_day": 28,
-        "zone": "ferskvand"
-      }
+      { "start_month": 11, "start_day": 16, "end_month": 2, "end_day": 28, "zone": "ferskvand" }
     ],
     "daily_limit": null,
     "notes": "Fredet 16. nov – 28./29. feb.",
@@ -291,8 +249,9 @@
     "image_asset": "assets/fish/havbars.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 42,
-      "kattegat_bælter_østersø": 42,
+      "nordsoen": 42,
+      "skagerrak_kattegat": 42,
+      "bælter_østersø": 42,
       "ferskvand": null
     },
     "closed_season": [],
@@ -310,8 +269,9 @@
     "image_asset": "assets/fish/pighvar.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 30,
-      "kattegat_bælter_østersø": 30,
+      "nordsoen": 30,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 30,
       "ferskvand": null
     },
     "closed_season": [],
@@ -327,8 +287,9 @@
     "image_asset": "assets/fish/slethvar.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 30,
-      "kattegat_bælter_østersø": 30,
+      "nordsoen": 30,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 30,
       "ferskvand": null
     },
     "closed_season": [],
@@ -344,8 +305,9 @@
     "image_asset": "assets/fish/søtunge.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 24,
-      "kattegat_bælter_østersø": 24,
+      "nordsoen": 24,
+      "skagerrak_kattegat": 24,
+      "bælter_østersø": 24,
       "ferskvand": null
     },
     "closed_season": [],
@@ -361,8 +323,9 @@
     "image_asset": "assets/fish/hvilling.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 27,
-      "kattegat_bælter_østersø": 23,
+      "nordsoen": 27,
+      "skagerrak_kattegat": 23,
+      "bælter_østersø": 23,
       "ferskvand": null
     },
     "closed_season": [],
@@ -378,8 +341,9 @@
     "image_asset": "assets/fish/kuller.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 30,
-      "kattegat_bælter_østersø": 27,
+      "nordsoen": 30,
+      "skagerrak_kattegat": 27,
+      "bælter_østersø": 27,
       "ferskvand": null
     },
     "closed_season": [],
@@ -395,8 +359,9 @@
     "image_asset": "assets/fish/mørksej.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 35,
-      "kattegat_bælter_østersø": 30,
+      "nordsoen": 35,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 30,
       "ferskvand": null
     },
     "closed_season": [],
@@ -412,8 +377,9 @@
     "image_asset": "assets/fish/kulmule.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 27,
-      "kattegat_bælter_østersø": 30,
+      "nordsoen": 27,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 30,
       "ferskvand": null
     },
     "closed_season": [],
@@ -429,8 +395,9 @@
     "image_asset": "assets/fish/sild.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 20,
-      "kattegat_bælter_østersø": 18,
+      "nordsoen": 20,
+      "skagerrak_kattegat": 18,
+      "bælter_østersø": 18,
       "ferskvand": null
     },
     "closed_season": [],
@@ -446,18 +413,13 @@
     "image_asset": "assets/fish/stenbider.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": null,
-      "kattegat_bælter_østersø": null,
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
       "ferskvand": null
     },
     "closed_season": [
-      {
-        "start_month": 1,
-        "start_day": 1,
-        "end_month": 12,
-        "end_day": 31,
-        "zone": "all"
-      }
+      { "start_month": 1, "start_day": 1, "end_month": 12, "end_day": 31, "zone": "all" }
     ],
     "daily_limit": 0,
     "notes": "Totalfredet hele året i både salt- og ferskvand.",
@@ -471,18 +433,13 @@
     "image_asset": "assets/fish/helt.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 36,
-      "kattegat_bælter_østersø": 36,
+      "nordsoen": 36,
+      "skagerrak_kattegat": 36,
+      "bælter_østersø": 36,
       "ferskvand": 36
     },
     "closed_season": [
-      {
-        "start_month": 11,
-        "start_day": 1,
-        "end_month": 1,
-        "end_day": 31,
-        "zone": "all"
-      }
+      { "start_month": 11, "start_day": 1, "end_month": 1, "end_day": 31, "zone": "all" }
     ],
     "daily_limit": null,
     "notes": "Mindstemål 36 cm (34 cm i Ringkøbing Fjord). Fredet 1. nov – 31. jan overalt. Lokale variationer: Nissum Fjord 1. okt – 31. mar; Ringkøbing og Stadil Fjord 1. nov – 28./29. feb; Limfjorden 1. jul – 31. aug.",
@@ -500,18 +457,13 @@
     "image_asset": "assets/fish/stalling.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": null,
-      "kattegat_bælter_østersø": null,
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
       "ferskvand": 33
     },
     "closed_season": [
-      {
-        "start_month": 1,
-        "start_day": 1,
-        "end_month": 12,
-        "end_day": 31,
-        "zone": "all"
-      }
+      { "start_month": 1, "start_day": 1, "end_month": 12, "end_day": 31, "zone": "all" }
     ],
     "daily_limit": 0,
     "notes": "Totalfredet til og med 15. maj 2026. Fra 16. maj 2026 gælder: fredet 15. mar – 15. maj, mindstemål 33 cm. Genudsæt altid.",
@@ -525,18 +477,13 @@
     "image_asset": "assets/fish/snæbel.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": null,
-      "kattegat_bælter_østersø": null,
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
       "ferskvand": null
     },
     "closed_season": [
-      {
-        "start_month": 1,
-        "start_day": 1,
-        "end_month": 12,
-        "end_day": 31,
-        "zone": "all"
-      }
+      { "start_month": 1, "start_day": 1, "end_month": 12, "end_day": 31, "zone": "all" }
     ],
     "daily_limit": 0,
     "notes": "Totalfredet. Kritisk truet art — genudsæt straks.",
@@ -550,8 +497,9 @@
     "image_asset": "assets/fish/hummer.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 22,
-      "kattegat_bælter_østersø": 21,
+      "nordsoen": 22,
+      "skagerrak_kattegat": 21,
+      "bælter_østersø": 21,
       "ferskvand": null
     },
     "closed_season": [],
@@ -567,8 +515,9 @@
     "image_asset": "assets/fish/jomfruhummer.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": 8,
-      "kattegat_bælter_østersø": 10,
+      "nordsoen": 9,
+      "skagerrak_kattegat": 11,
+      "bælter_østersø": 11,
       "ferskvand": null
     },
     "closed_season": [],
@@ -584,18 +533,13 @@
     "image_asset": "assets/fish/hanflodkrebs.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": null,
-      "kattegat_bælter_østersø": null,
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
       "ferskvand": 9
     },
     "closed_season": [
-      {
-        "start_month": 10,
-        "start_day": 1,
-        "end_month": 3,
-        "end_day": 31,
-        "zone": "ferskvand"
-      }
+      { "start_month": 10, "start_day": 1, "end_month": 3, "end_day": 31, "zone": "ferskvand" }
     ],
     "daily_limit": null,
     "notes": "Fredet 1. okt – 31. mar. Mindstemål 9 cm målt fra spidsen af pandetornen til den faste bagkant af svømmeviftens midterstykke.",
@@ -609,18 +553,13 @@
     "image_asset": "assets/fish/hunflodkrebs.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsø_skagerrak": null,
-      "kattegat_bælter_østersø": null,
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
       "ferskvand": 9
     },
     "closed_season": [
-      {
-        "start_month": 10,
-        "start_day": 1,
-        "end_month": 7,
-        "end_day": 31,
-        "zone": "ferskvand"
-      }
+      { "start_month": 10, "start_day": 1, "end_month": 7, "end_day": 31, "zone": "ferskvand" }
     ],
     "daily_limit": null,
     "notes": "Fredet 1. okt – 31. jul. Rognbærende hunner skal altid genudsættes. Mindstemål 9 cm målt fra spidsen af pandetornen til den faste bagkant af svømmeviftens midterstykke.",

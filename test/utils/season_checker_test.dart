@@ -7,8 +7,9 @@ import 'package:fangstguide/shared/utils/season_checker.dart';
 Fish _makeFish({
   List<ClosedSeason> closedSeason = const [],
   double? minSizeFerskvand,
-  double? minSizeNordsoe,
-  double? minSizeKattegat,
+  double? minSizeNordsoen,
+  double? minSizeSkagerrak,
+  double? minSizeBaelter,
   int? dailyLimit,
 }) =>
     Fish(
@@ -20,8 +21,9 @@ Fish _makeFish({
       freeTier: true,
       minimumSizeCm: MinimumSize(
         ferskvand: minSizeFerskvand,
-        nordsoeSkagerrak: minSizeNordsoe,
-        kattegatBaelterOestersoe: minSizeKattegat,
+        nordsoen: minSizeNordsoen,
+        skagerrakKattegat: minSizeSkagerrak,
+        baelterOestersoe: minSizeBaelter,
       ),
       closedSeason: closedSeason,
       dailyLimit: dailyLimit,
@@ -161,10 +163,10 @@ void main() {
   });
 
   group('checkSeason — zone-specifik fredning', () {
-    test('fredning kun for ferskvand → nordsø er åben', () {
+    test('fredning kun for ferskvand → nordsøen er åben', () {
       final cs = _cs(4, 1, 4, 30, zone: 'ferskvand');
       final fish = _makeFish(closedSeason: [cs]);
-      final result = checkSeason(fish, FishingZone.nordsoeSkagerrak, DateTime(2024, 4, 15));
+      final result = checkSeason(fish, FishingZone.nordsoen, DateTime(2024, 4, 15));
       expect(result.status, SeasonStatus.open);
     });
 
@@ -176,9 +178,9 @@ void main() {
     });
 
     test('minimumsstørrelse gælder kun for den rette zone', () {
-      final fish = _makeFish(minSizeFerskvand: 40, minSizeNordsoe: null);
+      final fish = _makeFish(minSizeFerskvand: 40, minSizeNordsoen: null);
       final freshResult = checkSeason(fish, FishingZone.ferskvand, DateTime(2024, 6, 1));
-      final saltResult = checkSeason(fish, FishingZone.nordsoeSkagerrak, DateTime(2024, 6, 1));
+      final saltResult = checkSeason(fish, FishingZone.nordsoen, DateTime(2024, 6, 1));
       expect(freshResult.status, SeasonStatus.checkSize);
       expect(saltResult.status, SeasonStatus.open);
     });

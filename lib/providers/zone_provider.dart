@@ -2,19 +2,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 enum FishingZone {
-  nordsoeSkagerrak,
-  kattegatBaelterOestersoe,
+  nordsoen,
+  skagerrakKattegat,
+  baelterOestersoe,
   ferskvand;
 
   String get displayName => switch (this) {
-        FishingZone.nordsoeSkagerrak => 'Nordsø/Skagerrak',
-        FishingZone.kattegatBaelterOestersoe => 'Kattegat/Bælter/Østersø',
+        FishingZone.nordsoen => 'Nordsøen',
+        FishingZone.skagerrakKattegat => 'Skagerrak/Kattegat',
+        FishingZone.baelterOestersoe => 'Bælterne/Østersøen',
         FishingZone.ferskvand => 'Ferskvand',
       };
 
   String get jsonKey => switch (this) {
-        FishingZone.nordsoeSkagerrak => 'nordsø_skagerrak',
-        FishingZone.kattegatBaelterOestersoe => 'kattegat_bælter_østersø',
+        FishingZone.nordsoen => 'nordsoen',
+        FishingZone.skagerrakKattegat => 'skagerrak_kattegat',
+        FishingZone.baelterOestersoe => 'bælter_østersø',
         FishingZone.ferskvand => 'ferskvand',
       };
 }
@@ -30,7 +33,7 @@ class ZoneNotifier extends StateNotifier<FishingZone> {
     final saved = box.get(_zoneHiveKey) as String?;
     return FishingZone.values.firstWhere(
       (z) => z.name == saved,
-      orElse: () => FishingZone.kattegatBaelterOestersoe,
+      orElse: () => FishingZone.skagerrakKattegat,
     );
   }
 

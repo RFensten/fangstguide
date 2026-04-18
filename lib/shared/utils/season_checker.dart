@@ -96,14 +96,15 @@ DateTime? _nextReopening(Fish fish, FishingZone zone, DateTime date) {
 
 double? _minimumSizeForZone(Fish fish, FishingZone zone) =>
     switch (zone) {
-      FishingZone.nordsoeSkagerrak => fish.minimumSizeCm.nordsoeSkagerrak,
-      FishingZone.kattegatBaelterOestersoe =>
-        fish.minimumSizeCm.kattegatBaelterOestersoe,
+      FishingZone.nordsoen => fish.minimumSizeCm.nordsoen,
+      FishingZone.skagerrakKattegat => fish.minimumSizeCm.skagerrakKattegat,
+      FishingZone.baelterOestersoe => fish.minimumSizeCm.baelterOestersoe,
       FishingZone.ferskvand => fish.minimumSizeCm.ferskvand,
     };
 
 bool _zoneMatches(String csZone, FishingZone zone) {
   if (csZone == 'all') return true;
+  if (csZone == 'salt') return zone != FishingZone.ferskvand;
   return csZone == zone.jsonKey;
 }
 

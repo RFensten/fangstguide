@@ -2,20 +2,22 @@ import 'closed_season.dart';
 import 'local_rule.dart';
 
 class MinimumSize {
-  final double? nordsoeSkagerrak;
-  final double? kattegatBaelterOestersoe;
+  final double? nordsoen;
+  final double? skagerrakKattegat;
+  final double? baelterOestersoe;
   final double? ferskvand;
 
   const MinimumSize({
-    this.nordsoeSkagerrak,
-    this.kattegatBaelterOestersoe,
+    this.nordsoen,
+    this.skagerrakKattegat,
+    this.baelterOestersoe,
     this.ferskvand,
   });
 
   factory MinimumSize.fromJson(Map<String, dynamic> json) => MinimumSize(
-        nordsoeSkagerrak: (json['nordsø_skagerrak'] as num?)?.toDouble(),
-        kattegatBaelterOestersoe:
-            (json['kattegat_bælter_østersø'] as num?)?.toDouble(),
+        nordsoen: (json['nordsoen'] as num?)?.toDouble(),
+        skagerrakKattegat: (json['skagerrak_kattegat'] as num?)?.toDouble(),
+        baelterOestersoe: (json['bælter_østersø'] as num?)?.toDouble(),
         ferskvand: (json['ferskvand'] as num?)?.toDouble(),
       );
 }

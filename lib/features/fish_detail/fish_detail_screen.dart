@@ -194,9 +194,14 @@ class _InfoGrid extends StatelessWidget {
     final hasFresh = fish.environment.contains('fresh');
     final hasBoth = hasSalt && hasFresh;
 
-    final saltMin = zone == FishingZone.nordsoeSkagerrak
-        ? fish.minimumSizeCm.nordsoeSkagerrak
-        : fish.minimumSizeCm.kattegatBaelterOestersoe;
+    final saltMin = switch (zone) {
+      FishingZone.nordsoen => fish.minimumSizeCm.nordsoen,
+      FishingZone.skagerrakKattegat => fish.minimumSizeCm.skagerrakKattegat,
+      FishingZone.baelterOestersoe => fish.minimumSizeCm.baelterOestersoe,
+      FishingZone.ferskvand => fish.minimumSizeCm.nordsoen ??
+          fish.minimumSizeCm.skagerrakKattegat ??
+          fish.minimumSizeCm.baelterOestersoe,
+    };
     final freshMin = fish.minimumSizeCm.ferskvand;
 
     final saltSeasons = fish.closedSeason

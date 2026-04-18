@@ -3,7 +3,7 @@ class ClosedSeason {
   final int startDay;
   final int endMonth;
   final int endDay;
-  final String zone; // "all" | "nordsø_skagerrak" | "kattegat_bælter_østersø" | "ferskvand"
+  final String zone; // "all" | "salt" | "nordsoen" | "skagerrak_kattegat" | "bælter_østersø" | "ferskvand"
 
   const ClosedSeason({
     required this.startMonth,

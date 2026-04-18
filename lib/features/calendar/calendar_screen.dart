@@ -76,7 +76,10 @@ class _MonthList extends StatelessWidget {
 
     for (final f in fish) {
       for (final cs in f.closedSeason) {
-        if (cs.zone != 'all' && cs.zone != zone.jsonKey) continue;
+        final matchesZone = cs.zone == 'all' ||
+            cs.zone == zone.jsonKey ||
+            (cs.zone == 'salt' && zone != FishingZone.ferskvand);
+        if (!matchesZone) continue;
 
         // Check if season opens this month
         final openDate =

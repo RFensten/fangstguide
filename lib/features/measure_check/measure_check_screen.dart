@@ -155,9 +155,9 @@ class _ResultBox extends StatelessWidget {
     }
 
     final minSize = switch (zone) {
-      FishingZone.nordsoeSkagerrak => fish!.minimumSizeCm.nordsoeSkagerrak,
-      FishingZone.kattegatBaelterOestersoe =>
-        fish!.minimumSizeCm.kattegatBaelterOestersoe,
+      FishingZone.nordsoen => fish!.minimumSizeCm.nordsoen,
+      FishingZone.skagerrakKattegat => fish!.minimumSizeCm.skagerrakKattegat,
+      FishingZone.baelterOestersoe => fish!.minimumSizeCm.baelterOestersoe,
       FishingZone.ferskvand => fish!.minimumSizeCm.ferskvand,
     };
 
