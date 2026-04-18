@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../providers/premium_provider.dart';
 import '../../providers/zone_provider.dart';
 import '../../shared/utils/season_checker.dart';
 import '../../shared/widgets/fish_card.dart';
@@ -37,11 +38,18 @@ class _FishListScreenState extends ConsumerState<FishListScreen> {
     final fishAsync = ref.watch(filteredFishProvider);
     final activeFilter = ref.watch(environmentFilterProvider);
     final zone = ref.watch(zoneProvider);
+    final isPremium = ref.watch(premiumProvider).valueOrNull ?? false;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Fangstguide'),
         actions: [
+          if (!isPremium)
+            TextButton.icon(
+              onPressed: () => context.push('/paywall'),
+              icon: const Icon(Icons.lock_open_outlined, size: 18),
+              label: const Text('Premium'),
+            ),
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             tooltip: 'Indstillinger',
@@ -91,8 +99,8 @@ class _FishListScreenState extends ConsumerState<FishListScreen> {
 
                 if (_query.isNotEmpty) {
                   displayed = displayed.where((f) =>
-                    f.nameDa.toLowerCase().contains(_query) ||
-                    f.nameLatin.toLowerCase().contains(_query),
+                      f.nameDa.toLowerCase().contains(_query) ||
+                      f.nameLatin.toLowerCase().contains(_query),
                   ).toList();
                 }
 
@@ -107,9 +115,13 @@ class _FishListScreenState extends ConsumerState<FishListScreen> {
                   itemCount: displayed.length,
                   itemBuilder: (context, index) {
                     final f = displayed[index];
-                    return FishCard(
+                    final locked = !isPremium && !f.freeTier;
+                    return _FishListItem(
                       fish: f,
-                      onTap: () => context.push('/fish/${f.id}'),
+                      locked: locked,
+                      onTap: () => locked
+                          ? context.push('/paywall')
+                          : context.push('/fish/${f.id}'),
                     );
                   },
                 );
@@ -118,6 +130,79 @@ class _FishListScreenState extends ConsumerState<FishListScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _FishListItem extends StatelessWidget {
+  final dynamic fish;
+  final bool locked;
+  final VoidCallback onTap;
+
+  const _FishListItem({
+    required this.fish,
+    required this.locked,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (!locked) {
+      return FishCard(fish: fish, onTap: onTap);
+    }
+
+    return Stack(
+      children: [
+        Opacity(
+          opacity: 0.45,
+          child: FishCard(fish: fish, onTap: onTap),
+        ),
+        Positioned.fill(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onTap,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.lock_outlined,
+                          size: 14,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onPrimaryContainer,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Premium',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

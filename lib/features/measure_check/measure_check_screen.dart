@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../data/fish_repository.dart';
 import '../../data/models/fish.dart';
+import '../../providers/premium_provider.dart';
 import '../../providers/zone_provider.dart';
 import '../../shared/utils/season_checker.dart';
 import '../../shared/utils/date_utils.dart' as du;
-
-final _selectedFishIdProvider = StateProvider<String?>((ref) => null);
-final _inputLengthProvider = StateProvider<String>((ref) => '');
 
 class MeasureCheckScreen extends ConsumerWidget {
   final String? preselectedFishId;
@@ -18,16 +17,24 @@ class MeasureCheckScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final fishAsync = ref.watch(fishListProvider);
+    final isPremium = ref.watch(premiumProvider).valueOrNull ?? false;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Tjek din fangst')),
       body: fishAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Fejl: $e')),
-        data: (fishList) => _MeasureForm(
-          fishList: fishList,
-          preselectedFishId: preselectedFishId,
-        ),
+        data: (fishList) {
+          final availableFish = isPremium
+              ? fishList
+              : fishList.where((f) => f.freeTier).toList();
+          return _MeasureForm(
+            fishList: availableFish,
+            allFishCount: fishList.length,
+            isPremium: isPremium,
+            preselectedFishId: preselectedFishId,
+          );
+        },
       ),
     );
   }
@@ -35,9 +42,16 @@ class MeasureCheckScreen extends ConsumerWidget {
 
 class _MeasureForm extends ConsumerStatefulWidget {
   final List<Fish> fishList;
+  final int allFishCount;
+  final bool isPremium;
   final String? preselectedFishId;
 
-  const _MeasureForm({required this.fishList, this.preselectedFishId});
+  const _MeasureForm({
+    required this.fishList,
+    required this.allFishCount,
+    required this.isPremium,
+    this.preselectedFishId,
+  });
 
   @override
   ConsumerState<_MeasureForm> createState() => _MeasureFormState();
@@ -51,10 +65,16 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
   @override
   void initState() {
     super.initState();
-    _selectedId = widget.preselectedFishId;
     _lengthController = TextEditingController();
     _lengthController.addListener(() => setState(() {}));
     _localZone = ref.read(zoneProvider);
+
+    // Brug preselectedFishId hvis arten er tilgængelig i den filtrerede liste
+    if (widget.preselectedFishId != null) {
+      final exists =
+          widget.fishList.any((f) => f.id == widget.preselectedFishId);
+      if (exists) _selectedId = widget.preselectedFishId;
+    }
   }
 
   @override
@@ -72,8 +92,8 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
           )
         : null;
 
-    final length = double.tryParse(
-        _lengthController.text.replaceAll(',', '.'));
+    final length =
+        double.tryParse(_lengthController.text.replaceAll(',', '.'));
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
@@ -92,6 +112,13 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
             }).toList(),
             onChanged: (v) => setState(() => _selectedId = v),
           ),
+          if (!widget.isPremium) ...[
+            const SizedBox(height: 8),
+            _PremiumUpsellBanner(
+              lockedCount:
+                  widget.allFishCount - widget.fishList.length,
+            ),
+          ],
           const SizedBox(height: 16),
           DropdownButtonFormField<FishingZone>(
             value: _localZone,
@@ -114,7 +141,8 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'[\d,.]')),
             ],
-            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            style:
+                const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
             decoration: const InputDecoration(
               labelText: 'Længde (cm)',
@@ -136,6 +164,48 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
             textAlign: TextAlign.center,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _PremiumUpsellBanner extends StatelessWidget {
+  final int lockedCount;
+
+  const _PremiumUpsellBanner({required this.lockedCount});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => context.push('/paywall'),
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondaryContainer,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.lock_outlined,
+                size: 16,
+                color: Theme.of(context).colorScheme.onSecondaryContainer),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                '$lockedCount arter låst — lås op med Premium',
+                style: TextStyle(
+                  fontSize: 13,
+                  color:
+                      Theme.of(context).colorScheme.onSecondaryContainer,
+                ),
+              ),
+            ),
+            Icon(Icons.chevron_right,
+                size: 18,
+                color: Theme.of(context).colorScheme.onSecondaryContainer),
+          ],
+        ),
       ),
     );
   }
