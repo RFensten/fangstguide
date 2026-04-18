@@ -46,6 +46,7 @@ class _MeasureForm extends ConsumerStatefulWidget {
 class _MeasureFormState extends ConsumerState<_MeasureForm> {
   late final TextEditingController _lengthController;
   String? _selectedId;
+  late FishingZone _localZone;
 
   @override
   void initState() {
@@ -53,6 +54,7 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
     _selectedId = widget.preselectedFishId;
     _lengthController = TextEditingController();
     _lengthController.addListener(() => setState(() {}));
+    _localZone = ref.read(zoneProvider);
   }
 
   @override
@@ -63,7 +65,6 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
 
   @override
   Widget build(BuildContext context) {
-    final zone = ref.watch(zoneProvider);
     final fish = _selectedId != null
         ? widget.fishList.firstWhere(
             (f) => f.id == _selectedId,
@@ -71,15 +72,14 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
           )
         : null;
 
-    final lengthText = _lengthController.text;
-    final length = double.tryParse(lengthText.replaceAll(',', '.'));
+    final length = double.tryParse(
+        _lengthController.text.replaceAll(',', '.'));
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Species dropdown
           DropdownButtonFormField<String>(
             value: _selectedId,
             decoration: const InputDecoration(
@@ -92,8 +92,20 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
             }).toList(),
             onChanged: (v) => setState(() => _selectedId = v),
           ),
+          const SizedBox(height: 16),
+          DropdownButtonFormField<FishingZone>(
+            value: _localZone,
+            decoration: const InputDecoration(
+              labelText: 'Zone',
+              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.place_outlined),
+            ),
+            items: FishingZone.values.map((z) {
+              return DropdownMenuItem(value: z, child: Text(z.displayName));
+            }).toList(),
+            onChanged: (v) => setState(() => _localZone = v!),
+          ),
           const SizedBox(height: 20),
-          // Length input
           TextField(
             controller: _lengthController,
             autofocus: _selectedId != null,
@@ -112,8 +124,7 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
             ),
           ),
           const SizedBox(height: 24),
-          // Live result
-          _ResultBox(fish: fish, zone: zone, length: length),
+          _ResultBox(fish: fish, zone: _localZone, length: length),
         ],
       ),
     );
