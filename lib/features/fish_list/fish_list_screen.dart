@@ -7,11 +7,33 @@ import '../../shared/widgets/fish_card.dart';
 import '../../shared/widgets/zone_selector.dart';
 import 'fish_list_provider.dart';
 
-class FishListScreen extends ConsumerWidget {
+class FishListScreen extends ConsumerStatefulWidget {
   const FishListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<FishListScreen> createState() => _FishListScreenState();
+}
+
+class _FishListScreenState extends ConsumerState<FishListScreen> {
+  final _searchController = TextEditingController();
+  String _query = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      setState(() => _query = _searchController.text.toLowerCase().trim());
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final fishAsync = ref.watch(filteredFishProvider);
     final activeFilter = ref.watch(environmentFilterProvider);
     final zone = ref.watch(zoneProvider);
@@ -30,6 +52,27 @@ class FishListScreen extends ConsumerWidget {
       body: Column(
         children: [
           const ZoneSelector(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Søg efter art...',
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: _query.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () => _searchController.clear(),
+                      )
+                    : null,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                isDense: true,
+                contentPadding: const EdgeInsets.symmetric(vertical: 10),
+              ),
+            ),
+          ),
           _FilterRow(activeFilter: activeFilter),
           Expanded(
             child: fishAsync.when(
@@ -39,17 +82,23 @@ class FishListScreen extends ConsumerWidget {
               data: (fish) {
                 var displayed = fish;
 
-                // Apply "Fredet nu" filter here since it needs season logic
                 if (activeFilter == EnvironmentFilter.closedNow) {
-                  displayed = fish.where((f) {
+                  displayed = displayed.where((f) {
                     final result = checkSeason(f, zone, DateTime.now());
                     return result.status == SeasonStatus.closed;
                   }).toList();
                 }
 
+                if (_query.isNotEmpty) {
+                  displayed = displayed.where((f) =>
+                    f.nameDa.toLowerCase().contains(_query) ||
+                    f.nameLatin.toLowerCase().contains(_query),
+                  ).toList();
+                }
+
                 if (displayed.isEmpty) {
                   return const Center(
-                    child: Text('Ingen arter matcher filteret.'),
+                    child: Text('Ingen arter matcher søgningen.'),
                   );
                 }
 
