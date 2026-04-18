@@ -21,10 +21,11 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            leading: const Icon(Icons.policy_outlined),
-            title: const Text('Privatlivspolitik'),
+            leading: const Icon(Icons.mail_outline),
+            title: const Text('Support'),
+            subtitle: const Text('rasmus.fensten@gmail.com'),
             onTap: () => launchUrl(
-              Uri.parse('https://fangstguide.dk/privacy'),
+              Uri.parse('mailto:rasmus.fensten@gmail.com?subject=Fangstguide support'),
               mode: LaunchMode.externalApplication,
             ),
           ),

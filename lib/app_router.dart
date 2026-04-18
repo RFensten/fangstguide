@@ -36,6 +36,64 @@ final appRouter = GoRouter(
   ],
 );
 
+class _DisclaimerDialog extends StatefulWidget {
+  final String disclaimerKey;
+  const _DisclaimerDialog({required this.disclaimerKey});
+
+  @override
+  State<_DisclaimerDialog> createState() => _DisclaimerDialogState();
+}
+
+class _DisclaimerDialogState extends State<_DisclaimerDialog> {
+  bool _checked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Vigtig information'),
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Oplysningerne i Fangstguide er vejledende og kan indeholde '
+              'fejl eller være forældede. Appen påtager sig intet ansvar for '
+              'handlinger foretaget på baggrund af appens indhold.\n\n'
+              'Tjek altid de gældende regler på lfst.dk før du fisker. '
+              'Det er dit eget ansvar at overholde fiskerilovgivningen.',
+            ),
+            const SizedBox(height: 16),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Checkbox(
+                  value: _checked,
+                  onChanged: (v) => setState(() => _checked = v ?? false),
+                ),
+                const Expanded(
+                  child: Text('Jeg har læst og forstået ovenstående'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        FilledButton(
+          onPressed: _checked
+              ? () {
+                  Hive.box('settings').put(widget.disclaimerKey, true);
+                  Navigator.of(context).pop();
+                }
+              : null,
+          child: const Text('Accepter'),
+        ),
+      ],
+    );
+  }
+}
+
 class _AppShell extends StatefulWidget {
   final Widget child;
   const _AppShell({required this.child});
@@ -60,27 +118,7 @@ class _AppShellState extends State<_AppShell> {
     await showDialog<void>(
       context: context,
       barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Vigtig information'),
-        content: const SingleChildScrollView(
-          child: Text(
-            'Oplysningerne i Fangstguide er vejledende og kan indeholde '
-            'fejl eller være forældede. Appen påtager sig intet ansvar for '
-            'handlinger foretaget på baggrund af appens indhold.\n\n'
-            'Tjek altid de gældende regler på lfst.dk før du fisker. '
-            'Det er dit eget ansvar at overholde fiskerilovgivningen.',
-          ),
-        ),
-        actions: [
-          FilledButton(
-            onPressed: () {
-              Hive.box('settings').put(_disclaimerKey, true);
-              Navigator.of(ctx).pop();
-            },
-            child: const Text('Jeg forstår og accepterer'),
-          ),
-        ],
-      ),
+      builder: (ctx) => _DisclaimerDialog(disclaimerKey: _disclaimerKey),
     );
   }
 
