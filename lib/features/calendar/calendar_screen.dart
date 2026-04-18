@@ -4,6 +4,7 @@ import '../../data/fish_repository.dart';
 import '../../data/models/fish.dart';
 import '../../providers/zone_provider.dart';
 import '../../shared/utils/date_utils.dart' as du;
+import '../../shared/widgets/zone_selector.dart';
 
 class CalendarScreen extends ConsumerWidget {
   const CalendarScreen({super.key});
@@ -15,10 +16,17 @@ class CalendarScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Hvad er åbent?')),
-      body: fishAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Fejl: $e')),
-        data: (fish) => _MonthList(fish: fish, zone: zone),
+      body: Column(
+        children: [
+          const ZoneSelector(),
+          Expanded(
+            child: fishAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (e, _) => Center(child: Text('Fejl: $e')),
+              data: (fish) => _MonthList(fish: fish, zone: zone),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -76,6 +84,10 @@ class _MonthList extends StatelessWidget {
 
     for (final f in fish) {
       for (final cs in f.closedSeason) {
+        // Skip year-round (totalfredet) — not meaningful as open/close events
+        if (cs.startMonth == 1 && cs.startDay == 1 &&
+            cs.endMonth == 12 && cs.endDay == 31) continue;
+
         final matchesZone = cs.zone == 'all' ||
             cs.zone == zone.jsonKey ||
             (cs.zone == 'salt' && zone != FishingZone.ferskvand);
