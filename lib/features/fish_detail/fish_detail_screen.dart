@@ -104,7 +104,7 @@ class _DetailContent extends StatelessWidget {
                   ],
                   const SizedBox(height: 24),
                   Text(
-                    'Kilde: lfst.dk · Opdateret jan 2025',
+                    'Kilde: lfst.dk · Saltvand 2026, Ferskvand 2025',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.colorScheme.onSurface.withOpacity(0.45),
                     ),
