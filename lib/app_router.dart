@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'features/fish_list/fish_list_screen.dart';
 import 'features/fish_detail/fish_detail_screen.dart';
 import 'features/calendar/calendar_screen.dart';
@@ -35,9 +36,53 @@ final appRouter = GoRouter(
   ],
 );
 
-class _AppShell extends StatelessWidget {
+class _AppShell extends StatefulWidget {
   final Widget child;
   const _AppShell({required this.child});
+
+  @override
+  State<_AppShell> createState() => _AppShellState();
+}
+
+class _AppShellState extends State<_AppShell> {
+  static const _disclaimerKey = 'disclaimer_accepted';
+
+  @override
+  void initState() {
+    super.initState();
+    final accepted = Hive.box('settings').get(_disclaimerKey) as bool? ?? false;
+    if (!accepted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _showDisclaimer());
+    }
+  }
+
+  Future<void> _showDisclaimer() async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Vigtig information'),
+        content: const SingleChildScrollView(
+          child: Text(
+            'Oplysningerne i Fangstguide er vejledende og kan indeholde '
+            'fejl eller være forældede. Appen påtager sig intet ansvar for '
+            'handlinger foretaget på baggrund af appens indhold.\n\n'
+            'Tjek altid de gældende regler på lfst.dk før du fisker. '
+            'Det er dit eget ansvar at overholde fiskerilovgivningen.',
+          ),
+        ),
+        actions: [
+          FilledButton(
+            onPressed: () {
+              Hive.box('settings').put(_disclaimerKey, true);
+              Navigator.of(ctx).pop();
+            },
+            child: const Text('Jeg forstår og accepterer'),
+          ),
+        ],
+      ),
+    );
+  }
 
   static int _indexFor(String location) {
     if (location.startsWith('/calendar')) return 1;
@@ -49,7 +94,7 @@ class _AppShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
     return Scaffold(
-      body: child,
+      body: widget.child,
       bottomNavigationBar: NavigationBar(
         selectedIndex: _indexFor(location),
         onDestinationSelected: (i) {
