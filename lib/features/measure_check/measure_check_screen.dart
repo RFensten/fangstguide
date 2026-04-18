@@ -125,6 +125,16 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
           ),
           const SizedBox(height: 24),
           _ResultBox(fish: fish, zone: _localZone, length: length),
+          const SizedBox(height: 16),
+          Text(
+            'Bemærk, at totallængden er regnet fra snudespids til halefinnens spids.',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey.shade600,
+              fontStyle: FontStyle.italic,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );
