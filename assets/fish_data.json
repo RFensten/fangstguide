@@ -1,0 +1,609 @@
+[
+  {
+    "id": "havørred",
+    "name_da": "Havørred",
+    "name_latin": "Salmo trutta",
+    "environment": ["salt", "fresh"],
+    "image_asset": "assets/fish/havørred.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 40,
+      "kattegat_bælter_østersø": 40,
+      "ferskvand": 40
+    },
+    "closed_season": [
+      {
+        "start_month": 11,
+        "start_day": 16,
+        "end_month": 1,
+        "end_day": 15,
+        "zone": "all"
+      }
+    ],
+    "daily_limit": null,
+    "notes": "Gælder både havørred og bækørred i saltvand.",
+    "local_rules": [
+      { "location": "Skjern Å", "note": "Udvidet fredning — tjek lokale regler." },
+      { "location": "Storå", "note": "Særlige regler for visse strækninger." }
+    ]
+  },
+  {
+    "id": "torsk",
+    "name_da": "Torsk",
+    "name_latin": "Gadus morhua",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/torsk.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 40,
+      "kattegat_bælter_østersø": 35,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Stærkt beskyttet bestand i Østersøen. Følg de seneste kvoteregler.",
+    "local_rules": [
+      { "location": "Østersøen (øst for Bornholm)", "note": "Særlige fangstbegrænsninger kan gælde." }
+    ]
+  },
+  {
+    "id": "gedde",
+    "name_da": "Gedde",
+    "name_latin": "Esox lucius",
+    "environment": ["fresh", "salt"],
+    "image_asset": "assets/fish/gedde.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 60,
+      "kattegat_bælter_østersø": 60,
+      "ferskvand": 60
+    },
+    "closed_season": [
+      {
+        "start_month": 4,
+        "start_day": 1,
+        "end_month": 4,
+        "end_day": 30,
+        "zone": "all"
+      }
+    ],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "laks",
+    "name_da": "Laks",
+    "name_latin": "Salmo salar",
+    "environment": ["salt", "fresh"],
+    "image_asset": "assets/fish/laks.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 40,
+      "kattegat_bælter_østersø": 40,
+      "ferskvand": 40
+    },
+    "closed_season": [
+      {
+        "start_month": 11,
+        "start_day": 16,
+        "end_month": 1,
+        "end_day": 15,
+        "zone": "all"
+      }
+    ],
+    "daily_limit": 1,
+    "notes": "Kvote: 1 laks pr. år pr. fisker i mange vandløb. Tjek lokale regler.",
+    "local_rules": [
+      { "location": "Gudenå", "note": "Laksefiskeri kræver særlig tilladelse." },
+      { "location": "Skjern Å", "note": "Særlige kvoter og zoner." }
+    ]
+  },
+  {
+    "id": "aborre",
+    "name_da": "Aborre",
+    "name_latin": "Perca fluviatilis",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/aborre.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "sandart",
+    "name_da": "Sandart",
+    "name_latin": "Sander lucioperca",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/sandart.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": 50
+    },
+    "closed_season": [
+      {
+        "start_month": 5,
+        "start_day": 1,
+        "end_month": 5,
+        "end_day": 31,
+        "zone": "ferskvand"
+      }
+    ],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "makrel",
+    "name_da": "Makrel",
+    "name_latin": "Scomber scombrus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/makrel.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "rødspætte",
+    "name_da": "Rødspætte",
+    "name_latin": "Pleuronectes platessa",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/rødspætte.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 27,
+      "kattegat_bælter_østersø": 27,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "skrubbe",
+    "name_da": "Skrubbe",
+    "name_latin": "Platichthys flesus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/skrubbe.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 25,
+      "kattegat_bælter_østersø": 25,
+      "ferskvand": null
+    },
+    "closed_season": [
+      {
+        "start_month": 2,
+        "start_day": 15,
+        "end_month": 5,
+        "end_day": 14,
+        "zone": "all"
+      }
+    ],
+    "daily_limit": null,
+    "notes": "Fredningen gælder kun hunfisk. Hanfisk er lovlige hele året. Hunner er mørkere på oversiden.",
+    "local_rules": []
+  },
+  {
+    "id": "ål",
+    "name_da": "Ål",
+    "name_latin": "Anguilla anguilla",
+    "environment": ["fresh", "salt"],
+    "image_asset": "assets/fish/ål.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 35,
+      "kattegat_bælter_østersø": 35,
+      "ferskvand": 45
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Kritisk truet art. Opfordring til genudsætning. Særlige regler kan gælde regionalt.",
+    "local_rules": [
+      { "location": "Visse vandløb", "note": "Lokal ålefredning kan være gældende — tjek med lokale." }
+    ]
+  },
+  {
+    "id": "bækørred",
+    "name_da": "Bækørred",
+    "name_latin": "Salmo trutta fario",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/bækørred.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": 30
+    },
+    "closed_season": [
+      {
+        "start_month": 11,
+        "start_day": 16,
+        "end_month": 1,
+        "end_day": 15,
+        "zone": "ferskvand"
+      }
+    ],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "søørred",
+    "name_da": "Søørred",
+    "name_latin": "Salmo trutta lacustris",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/søørred.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": 40
+    },
+    "closed_season": [
+      {
+        "start_month": 11,
+        "start_day": 16,
+        "end_month": 1,
+        "end_day": 15,
+        "zone": "ferskvand"
+      }
+    ],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "havbars",
+    "name_da": "Havbars",
+    "name_latin": "Dicentrarchus labrax",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/havbars.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 42,
+      "kattegat_bælter_østersø": 42,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "pighvar",
+    "name_da": "Pighvar",
+    "name_latin": "Scophthalmus maximus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/pighvar.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 30,
+      "kattegat_bælter_østersø": 30,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "slethvar",
+    "name_da": "Slethvar",
+    "name_latin": "Scophthalmus rhombus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/slethvar.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 30,
+      "kattegat_bælter_østersø": 30,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "søtunge",
+    "name_da": "Søtunge",
+    "name_latin": "Solea solea",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/søtunge.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 24,
+      "kattegat_bælter_østersø": 24,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "hvilling",
+    "name_da": "Hvilling",
+    "name_latin": "Merlangius merlangus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/hvilling.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 23,
+      "kattegat_bælter_østersø": 23,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "kuller",
+    "name_da": "Kuller",
+    "name_latin": "Melanogrammus aeglefinus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/kuller.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 35,
+      "kattegat_bælter_østersø": 35,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "mørksej",
+    "name_da": "Mørksej",
+    "name_latin": "Pollachius virens",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/mørksej.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 35,
+      "kattegat_bælter_østersø": 35,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "kulmule",
+    "name_da": "Kulmule",
+    "name_latin": "Merluccius merluccius",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/kulmule.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 27,
+      "kattegat_bælter_østersø": 27,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "sild",
+    "name_da": "Sild",
+    "name_latin": "Clupea harengus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/sild.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "stenbider",
+    "name_da": "Stenbider",
+    "name_latin": "Cyclopterus lumpus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/stenbider.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "helt",
+    "name_da": "Helt",
+    "name_latin": "Coregonus oxyrinchus",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/helt.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": 36
+    },
+    "closed_season": [
+      {
+        "start_month": 11,
+        "start_day": 1,
+        "end_month": 1,
+        "end_day": 31,
+        "zone": "ferskvand"
+      }
+    ],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "stalling",
+    "name_da": "Stalling",
+    "name_latin": "Thymallus thymallus",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/stalling.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": null
+    },
+    "closed_season": [
+      {
+        "start_month": 1,
+        "start_day": 1,
+        "end_month": 12,
+        "end_day": 31,
+        "zone": "all"
+      }
+    ],
+    "daily_limit": 0,
+    "notes": "Totalfredet i de fleste vandløb. Genudsæt altid.",
+    "local_rules": []
+  },
+  {
+    "id": "snæbel",
+    "name_da": "Snæbel",
+    "name_latin": "Coregonus oxyrinchus",
+    "environment": ["fresh", "salt"],
+    "image_asset": "assets/fish/snæbel.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": null
+    },
+    "closed_season": [
+      {
+        "start_month": 1,
+        "start_day": 1,
+        "end_month": 12,
+        "end_day": 31,
+        "zone": "all"
+      }
+    ],
+    "daily_limit": 0,
+    "notes": "Totalfredet. Kritisk truet art — genudsæt straks.",
+    "local_rules": []
+  },
+  {
+    "id": "hummer",
+    "name_da": "Hummer",
+    "name_latin": "Homarus gammarus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/hummer.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 9,
+      "kattegat_bælter_østersø": 9,
+      "ferskvand": null
+    },
+    "closed_season": [
+      {
+        "start_month": 4,
+        "start_day": 1,
+        "end_month": 5,
+        "end_day": 31,
+        "zone": "all"
+      }
+    ],
+    "daily_limit": null,
+    "notes": "Mindstemålet er 9 cm målt på karapaks (rygskjoldet). Rognbærende hunner skal genudsættes.",
+    "local_rules": []
+  },
+  {
+    "id": "jomfruhummer",
+    "name_da": "Jomfruhummer",
+    "name_latin": "Nephrops norvegicus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/jomfruhummer.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": 13,
+      "kattegat_bælter_østersø": 13,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemålet er 13 cm i total længde.",
+    "local_rules": []
+  },
+  {
+    "id": "hanflodkrebs",
+    "name_da": "Hanflodkrebs",
+    "name_latin": "Astacus astacus (han)",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/hanflodkrebs.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": 9
+    },
+    "closed_season": [
+      {
+        "start_month": 4,
+        "start_day": 1,
+        "end_month": 5,
+        "end_day": 31,
+        "zone": "ferskvand"
+      }
+    ],
+    "daily_limit": null,
+    "notes": "Mindstemålet er 9 cm i total længde.",
+    "local_rules": []
+  },
+  {
+    "id": "hunflodkrebs",
+    "name_da": "Hunflodkrebs",
+    "name_latin": "Astacus astacus (hun)",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/hunflodkrebs.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsø_skagerrak": null,
+      "kattegat_bælter_østersø": null,
+      "ferskvand": 9
+    },
+    "closed_season": [
+      {
+        "start_month": 4,
+        "start_day": 1,
+        "end_month": 9,
+        "end_day": 30,
+        "zone": "ferskvand"
+      }
+    ],
+    "daily_limit": null,
+    "notes": "Mindstemålet er 9 cm i total længde. Rognbærende hunner skal altid genudsættes.",
+    "local_rules": []
+  }
+]
