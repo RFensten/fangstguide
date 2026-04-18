@@ -32,7 +32,7 @@ class SettingsScreen extends ConsumerWidget {
           const ListTile(
             leading: Icon(Icons.info_outline),
             title: Text('Datakilde'),
-            subtitle: Text('lfst.dk — opdateret jan 2025'),
+            subtitle: Text('lfst.dk · Saltvand 2026, Ferskvand 2025'),
           ),
         ],
       ),
