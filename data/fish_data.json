@@ -37,10 +37,10 @@
       "ferskvand": null
     },
     "closed_season": [],
-    "daily_limit": 1,
-    "notes": "Mindstemål: Nordsøen 35 cm, Skagerrak/Kattegat 30 cm, Bælterne og Østersøen 35 cm. Max 1 torsk pr. dag i Østersøen (underområde 22-32) i 2026 — utilsigtede fangster skal straks genudsættes.",
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen 35 cm, Skagerrak/Kattegat 30 cm, Bælterne og Østersøen 35 cm. EU-bestemt fangstbegrænsning: forbud mod torskefiskeri i Vestlige Østersø underområde 22, 23 og 24 i hele 2025 — tjek lfst.dk for eventuel forlængelse.",
     "local_rules": [
-      { "location": "Østersøen (underområde 22-32)", "note": "Max 1 torsk pr. dag i 2026. Genudsæt straks ved utilsigtet fangst." }
+      { "location": "Vestlige Østersø (underområde 22, 23 og 24)", "note": "Forbud mod torskefiskeri i hele 2025. Genudsæt straks ved utilsigtet fangst." }
     ]
   },
   {
