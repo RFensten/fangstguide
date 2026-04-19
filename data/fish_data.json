@@ -1,0 +1,568 @@
+[
+  {
+    "id": "havørred",
+    "name_da": "Havørred",
+    "name_latin": "Salmo trutta",
+    "environment": ["salt", "fresh"],
+    "image_asset": "assets/fish/havørred.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 40,
+      "skagerrak_kattegat": 40,
+      "bælter_østersø": 40,
+      "ferskvand": 40
+    },
+    "closed_season": [
+      { "start_month": 11, "start_day": 16, "end_month": 1, "end_day": 15, "zone": "salt" },
+      { "start_month": 11, "start_day": 16, "end_month": 2, "end_day": 28, "zone": "ferskvand" }
+    ],
+    "daily_limit": null,
+    "notes": "Saltvand: fredet 16. nov – 15. jan (i yngledragt). Ferskvand: fredet 16. nov – 28./29. feb. Vadehavet og Bornholmske farvande: fredet 16. sep – 28./29. feb. Ringkøbing, Nissum og Stadil fjorde samt Von Å: totalfredet hele året.",
+    "local_rules": [
+      { "location": "Ringkøbing, Nissum og Stadil fjorde samt Von Å", "note": "Totalfredet hele året." },
+      { "location": "Vadehavet og Bornholmske farvande", "note": "Udvidet fredning: 16. sep – 28./29. feb." }
+    ]
+  },
+  {
+    "id": "torsk",
+    "name_da": "Torsk",
+    "name_latin": "Gadus morhua",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/torsk.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 35,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 35,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen 35 cm, Skagerrak/Kattegat 30 cm, Bælterne og Østersøen 35 cm. Rekreativt torskefiskeri forbudt i Østersøen underområde 22-32 hele 2026 — utilsigtede fangster skal straks genudsættes.",
+    "local_rules": [
+      { "location": "Østersøen (underområde 22-32)", "note": "Forbud mod torskefiskeri i hele 2026." }
+    ]
+  },
+  {
+    "id": "gedde",
+    "name_da": "Gedde",
+    "name_latin": "Esox lucius",
+    "environment": ["fresh", "salt"],
+    "image_asset": "assets/fish/gedde.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 60,
+      "skagerrak_kattegat": 60,
+      "bælter_østersø": 60,
+      "ferskvand": 60
+    },
+    "closed_season": [
+      { "start_month": 4, "start_day": 1, "end_month": 5, "end_day": 15, "zone": "salt" },
+      { "start_month": 3, "start_day": 15, "end_month": 4, "end_day": 30, "zone": "ferskvand" }
+    ],
+    "daily_limit": null,
+    "notes": "Saltvand: fredet 1. apr – 15. maj. Ferskvand: fredet 15. mar – 30. apr.",
+    "local_rules": []
+  },
+  {
+    "id": "laks",
+    "name_da": "Laks",
+    "name_latin": "Salmo salar",
+    "environment": ["salt", "fresh"],
+    "image_asset": "assets/fish/laks.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 60,
+      "skagerrak_kattegat": 60,
+      "bælter_østersø": 60,
+      "ferskvand": 40
+    },
+    "closed_season": [
+      { "start_month": 11, "start_day": 16, "end_month": 1, "end_day": 15, "zone": "salt" },
+      { "start_month": 11, "start_day": 16, "end_month": 2, "end_day": 28, "zone": "ferskvand" }
+    ],
+    "daily_limit": null,
+    "notes": "Saltvand: mindstemål 60 cm, fredet 16. nov – 15. jan (i yngledragt). Ferskvand: mindstemål 40 cm, fredet 16. nov – 28./29. feb. Østersøen: kun fedtfinneklippet (udsat) laks — max 1 pr. dag. Vadehavet og visse vandløb: totalfredet.",
+    "local_rules": [
+      { "location": "Gudenå", "note": "Laksefiskeri kræver særlig tilladelse." },
+      { "location": "Skjern Å", "note": "Særlige kvoter og zoner." },
+      { "location": "Vadehavet og Nissum/Stadil fjorde", "note": "Totalfredet." }
+    ]
+  },
+  {
+    "id": "aborre",
+    "name_da": "Aborre",
+    "name_latin": "Perca fluviatilis",
+    "environment": ["fresh", "salt"],
+    "image_asset": "assets/fish/aborre.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 20,
+      "skagerrak_kattegat": 20,
+      "bælter_østersø": 20,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål 20 cm gælder i saltvand. Ingen mindstemål i ferskvand.",
+    "local_rules": []
+  },
+  {
+    "id": "sandart",
+    "name_da": "Sandart",
+    "name_latin": "Sander lucioperca",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/sandart.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
+      "ferskvand": 50
+    },
+    "closed_season": [
+      { "start_month": 5, "start_day": 1, "end_month": 5, "end_day": 31, "zone": "ferskvand" }
+    ],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "makrel",
+    "name_da": "Makrel",
+    "name_latin": "Scomber scombrus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/makrel.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 30,
+      "skagerrak_kattegat": 20,
+      "bælter_østersø": 20,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen 30 cm, Skagerrak/Kattegat og Østersøen 20 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "rødspætte",
+    "name_da": "Rødspætte",
+    "name_latin": "Pleuronectes platessa",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/rødspætte.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 27,
+      "skagerrak_kattegat": 27,
+      "bælter_østersø": 25,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen og Skagerrak/Kattegat 27 cm, Bælterne og Østersøen 25 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "skrubbe",
+    "name_da": "Skrubbe",
+    "name_latin": "Platichthys flesus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/skrubbe.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 18,
+      "skagerrak_kattegat": 21,
+      "bælter_østersø": 23,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål efter ICES-zone: Nordsøen (29-32) 18 cm, Skagerrak/Kattegat (26-28) 21 cm, Bælterne og Østersøen (22-25) 23 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "ål",
+    "name_da": "Ål",
+    "name_latin": "Anguilla anguilla",
+    "environment": ["fresh", "salt"],
+    "image_asset": "assets/fish/ål.svg",
+    "free_tier": true,
+    "minimum_size_cm": {
+      "nordsoen": 40,
+      "skagerrak_kattegat": 40,
+      "bælter_østersø": 40,
+      "ferskvand": 45
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Saltvand: mindstemål 40 cm (38 cm i Limfjorden, Nissum og Stadil fjorde). Fangst af ål i saltvand var forbudt 01. jan 2024 – 31. mar 2026. Ferskvand: mindstemål 45 cm. Ruser må ikke anvendes 16. okt – 31. jul i ferskvand. Kritisk truet art — opfordring til genudsætning.",
+    "local_rules": [
+      { "location": "Visse vandløb", "note": "Lokal ålefredning kan gælde — tjek lokalt." }
+    ]
+  },
+  {
+    "id": "bækørred",
+    "name_da": "Bækørred",
+    "name_latin": "Salmo trutta fario",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/bækørred.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
+      "ferskvand": 30
+    },
+    "closed_season": [
+      { "start_month": 11, "start_day": 16, "end_month": 2, "end_day": 28, "zone": "ferskvand" }
+    ],
+    "daily_limit": null,
+    "notes": "Fredet 16. nov – 28./29. feb.",
+    "local_rules": []
+  },
+  {
+    "id": "søørred",
+    "name_da": "Søørred",
+    "name_latin": "Salmo trutta lacustris",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/søørred.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
+      "ferskvand": 40
+    },
+    "closed_season": [
+      { "start_month": 11, "start_day": 16, "end_month": 2, "end_day": 28, "zone": "ferskvand" }
+    ],
+    "daily_limit": null,
+    "notes": "Fredet 16. nov – 28./29. feb.",
+    "local_rules": []
+  },
+  {
+    "id": "havbars",
+    "name_da": "Havbars",
+    "name_latin": "Dicentrarchus labrax",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/havbars.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 42,
+      "skagerrak_kattegat": 42,
+      "bælter_østersø": 42,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": 3,
+    "notes": "ICES 4b (Nordsøen syd for Hanstholm): kun catch and release — dog tilladt at hjemtage max 3 pr. dag i januar og 1. apr – 31. dec. Fisk der beholdes skal landes hele.",
+    "local_rules": [
+      { "location": "Nordsøen syd for Hanstholm (ICES 4b)", "note": "Max 3 havbars pr. dag tilladt i jan og apr-dec. Resten af året: catch and release." }
+    ]
+  },
+  {
+    "id": "pighvar",
+    "name_da": "Pighvar",
+    "name_latin": "Scophthalmus maximus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/pighvar.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 30,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 30,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "slethvar",
+    "name_da": "Slethvar",
+    "name_latin": "Scophthalmus rhombus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/slethvar.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 30,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 30,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "søtunge",
+    "name_da": "Søtunge",
+    "name_latin": "Solea solea",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/søtunge.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 24,
+      "skagerrak_kattegat": 24,
+      "bælter_østersø": 24,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": null,
+    "local_rules": []
+  },
+  {
+    "id": "hvilling",
+    "name_da": "Hvilling",
+    "name_latin": "Merlangius merlangus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/hvilling.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 27,
+      "skagerrak_kattegat": 23,
+      "bælter_østersø": 23,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen 27 cm, Skagerrak/Kattegat og Østersøen 23 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "kuller",
+    "name_da": "Kuller",
+    "name_latin": "Melanogrammus aeglefinus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/kuller.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 30,
+      "skagerrak_kattegat": 27,
+      "bælter_østersø": 27,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen 30 cm, Skagerrak/Kattegat og Østersøen 27 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "mørksej",
+    "name_da": "Mørksej",
+    "name_latin": "Pollachius virens",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/mørksej.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 35,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 30,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen 35 cm, Skagerrak/Kattegat og Østersøen 30 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "kulmule",
+    "name_da": "Kulmule",
+    "name_latin": "Merluccius merluccius",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/kulmule.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 27,
+      "skagerrak_kattegat": 30,
+      "bælter_østersø": 30,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen 27 cm, Skagerrak/Kattegat og Østersøen 30 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "sild",
+    "name_da": "Sild",
+    "name_latin": "Clupea harengus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/sild.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 20,
+      "skagerrak_kattegat": 18,
+      "bælter_østersø": 18,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål: Nordsøen 20 cm, Skagerrak/Kattegat og Østersøen 18 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "stenbider",
+    "name_da": "Stenbider",
+    "name_latin": "Cyclopterus lumpus",
+    "environment": ["salt", "fresh"],
+    "image_asset": "assets/fish/stenbider.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
+      "ferskvand": null
+    },
+    "closed_season": [
+      { "start_month": 1, "start_day": 1, "end_month": 12, "end_day": 31, "zone": "all" }
+    ],
+    "daily_limit": 0,
+    "notes": "Totalfredet hele året i både salt- og ferskvand.",
+    "local_rules": []
+  },
+  {
+    "id": "helt",
+    "name_da": "Helt",
+    "name_latin": "Coregonus lavaretus",
+    "environment": ["fresh", "salt"],
+    "image_asset": "assets/fish/helt.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 36,
+      "skagerrak_kattegat": 36,
+      "bælter_østersø": 36,
+      "ferskvand": 36
+    },
+    "closed_season": [
+      { "start_month": 11, "start_day": 1, "end_month": 1, "end_day": 31, "zone": "all" }
+    ],
+    "daily_limit": null,
+    "notes": "Mindstemål 36 cm (34 cm i Ringkøbing Fjord). Fredet 1. nov – 31. jan overalt. Lokale variationer: Nissum Fjord 1. okt – 31. mar; Ringkøbing og Stadil Fjord 1. nov – 28./29. feb; Limfjorden 1. jul – 31. aug.",
+    "local_rules": [
+      { "location": "Nissum Fjord", "note": "Fredet 1. okt – 31. mar." },
+      { "location": "Ringkøbing og Stadil Fjord", "note": "Fredet 1. nov – 28./29. feb. Mindstemål 34 cm." },
+      { "location": "Limfjorden", "note": "Fredet 1. jul – 31. aug." }
+    ]
+  },
+  {
+    "id": "stalling",
+    "name_da": "Stalling",
+    "name_latin": "Thymallus thymallus",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/stalling.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
+      "ferskvand": 33
+    },
+    "closed_season": [
+      { "start_month": 1, "start_day": 1, "end_month": 12, "end_day": 31, "zone": "all" }
+    ],
+    "daily_limit": 0,
+    "notes": "Totalfredet til og med 15. maj 2026. Fra 16. maj 2026 gælder: fredet 15. mar – 15. maj, mindstemål 33 cm. Genudsæt altid.",
+    "local_rules": []
+  },
+  {
+    "id": "snæbel",
+    "name_da": "Snæbel",
+    "name_latin": "Coregonus oxyrinchus",
+    "environment": ["fresh", "salt"],
+    "image_asset": "assets/fish/snæbel.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
+      "ferskvand": null
+    },
+    "closed_season": [
+      { "start_month": 1, "start_day": 1, "end_month": 12, "end_day": 31, "zone": "all" }
+    ],
+    "daily_limit": 0,
+    "notes": "Totalfredet. Kritisk truet art — genudsæt straks.",
+    "local_rules": []
+  },
+  {
+    "id": "hummer",
+    "name_da": "Hummer",
+    "name_latin": "Homarus gammarus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/hummer.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 22,
+      "skagerrak_kattegat": 21,
+      "bælter_østersø": 21,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": 5,
+    "notes": "Mindstemål (totallængde): Nordsøen 22 cm / Bælterne og Østersøen 21 cm. Målt på rygskjold: Nordsøen 8,7 cm / Bælterne 7,8 cm. Rognhummer (rognbærende hunner) er totalfredet hele året. Max 5 hummer pr. fisker pr. dag. Hummere skal landes hele.",
+    "local_rules": []
+  },
+  {
+    "id": "jomfruhummer",
+    "name_da": "Jomfruhummer",
+    "name_latin": "Nephrops norvegicus",
+    "environment": ["salt"],
+    "image_asset": "assets/fish/jomfruhummer.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": 9,
+      "skagerrak_kattegat": 11,
+      "bælter_østersø": 11,
+      "ferskvand": null
+    },
+    "closed_season": [],
+    "daily_limit": null,
+    "notes": "Mindstemål (totallængde): Nordsøen 8,5 cm, Skagerrak/Kattegat og Bælterne 10,5 cm. Målt på rygskjold: Nordsøen 2,5 cm, Skagerrak/Kattegat og Bælterne 3,2 cm.",
+    "local_rules": []
+  },
+  {
+    "id": "hanflodkrebs",
+    "name_da": "Hanflodkrebs",
+    "name_latin": "Astacus astacus (han)",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/hanflodkrebs.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
+      "ferskvand": 9
+    },
+    "closed_season": [
+      { "start_month": 10, "start_day": 1, "end_month": 3, "end_day": 31, "zone": "ferskvand" }
+    ],
+    "daily_limit": null,
+    "notes": "Fredet 1. okt – 31. mar. Mindstemål 9 cm målt fra spidsen af pandetornen til den faste bagkant af svømmeviftens midterstykke.",
+    "local_rules": []
+  },
+  {
+    "id": "hunflodkrebs",
+    "name_da": "Hunflodkrebs",
+    "name_latin": "Astacus astacus (hun)",
+    "environment": ["fresh"],
+    "image_asset": "assets/fish/hunflodkrebs.svg",
+    "free_tier": false,
+    "minimum_size_cm": {
+      "nordsoen": null,
+      "skagerrak_kattegat": null,
+      "bælter_østersø": null,
+      "ferskvand": 9
+    },
+    "closed_season": [
+      { "start_month": 10, "start_day": 1, "end_month": 7, "end_day": 31, "zone": "ferskvand" }
+    ],
+    "daily_limit": null,
+    "notes": "Fredet 1. okt – 31. jul. Rognbærende hunner skal altid genudsættes. Mindstemål 9 cm målt fra spidsen af pandetornen til den faste bagkant af svømmeviftens midterstykke.",
+    "local_rules": []
+  }
+]
