@@ -37,10 +37,10 @@
       "ferskvand": null
     },
     "closed_season": [],
-    "daily_limit": null,
-    "notes": "Mindstemål: Nordsøen 35 cm, Skagerrak/Kattegat 30 cm, Bælterne og Østersøen 35 cm. Rekreativt torskefiskeri forbudt i Østersøen underområde 22-32 hele 2026 — utilsigtede fangster skal straks genudsættes.",
+    "daily_limit": 1,
+    "notes": "Mindstemål: Nordsøen 35 cm, Skagerrak/Kattegat 30 cm, Bælterne og Østersøen 35 cm. Max 1 torsk pr. dag i Østersøen (underområde 22-32) i 2026 — utilsigtede fangster skal straks genudsættes.",
     "local_rules": [
-      { "location": "Østersøen (underområde 22-32)", "note": "Forbud mod torskefiskeri i hele 2026." }
+      { "location": "Østersøen (underområde 22-32)", "note": "Max 1 torsk pr. dag i 2026. Genudsæt straks ved utilsigtet fangst." }
     ]
   },
   {
@@ -104,8 +104,10 @@
     },
     "closed_season": [],
     "daily_limit": null,
-    "notes": "Mindstemål 20 cm gælder i saltvand. Ingen mindstemål i ferskvand.",
-    "local_rules": []
+    "notes": "Mindstemål 20 cm gælder i saltvand. Ingen mindstemål i ferskvand. Lokale regler: i visse områder gælder mindstemål 24 cm og fredning 1. mar – 30. apr.",
+    "local_rules": [
+      { "location": "Sydøstjylland, Møn, Lolland og Falster", "note": "Mindstemål 24 cm. Fredet 1. mar – 30. apr." }
+    ]
   },
   {
     "id": "sandart",
@@ -196,7 +198,7 @@
     },
     "closed_season": [],
     "daily_limit": null,
-    "notes": "Saltvand: mindstemål 40 cm (38 cm i Limfjorden, Nissum og Stadil fjorde). Fangst af ål i saltvand var forbudt 01. jan 2024 – 31. mar 2026. Ferskvand: mindstemål 45 cm. Ruser må ikke anvendes 16. okt – 31. jul i ferskvand. Kritisk truet art — opfordring til genudsætning.",
+    "notes": "Saltvand: mindstemål 40 cm (38 cm i Limfjorden, Nissum og Stadil fjorde). Fangst af ål i saltvand er forbudt 01. jan 2025 – 31. mar 2026. Ferskvand: mindstemål 45 cm. Ruser må ikke anvendes 16. okt – 31. jul i ferskvand. Kritisk truet art — opfordring til genudsætning.",
     "local_rules": [
       { "location": "Visse vandløb", "note": "Lokal ålefredning kan gælde — tjek lokalt." }
     ]
@@ -502,10 +504,14 @@
       "bælter_østersø": 21,
       "ferskvand": null
     },
-    "closed_season": [],
+    "closed_season": [
+      { "start_month": 7, "start_day": 1, "end_month": 8, "end_day": 31, "zone": "ferskvand" }
+    ],
     "daily_limit": 5,
     "notes": "Mindstemål (totallængde): Nordsøen 22 cm / Bælterne og Østersøen 21 cm. Målt på rygskjold: Nordsøen 8,7 cm / Bælterne 7,8 cm. Rognhummer (rognbærende hunner) er totalfredet hele året. Max 5 hummer pr. fisker pr. dag. Hummere skal landes hele.",
-    "local_rules": []
+    "local_rules": [
+      { "location": "Limfjorden", "note": "Fredet 1. jul – 31. aug." }
+    ]
   },
   {
     "id": "jomfruhummer",
@@ -515,9 +521,9 @@
     "image_asset": "assets/fish/jomfruhummer.svg",
     "free_tier": false,
     "minimum_size_cm": {
-      "nordsoen": 9,
-      "skagerrak_kattegat": 11,
-      "bælter_østersø": 11,
+      "nordsoen": 8.5,
+      "skagerrak_kattegat": 10.5,
+      "bælter_østersø": 10.5,
       "ferskvand": null
     },
     "closed_season": [],
