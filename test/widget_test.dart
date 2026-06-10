@@ -1,30 +1,23 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:fangstguide/main.dart';
+import 'package:fangstguide/shared/utils/season_checker.dart';
+import 'package:fangstguide/shared/widgets/status_badge.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  Widget wrap(Widget child) => MaterialApp(home: Scaffold(body: child));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('StatusBadge viser korrekt tekst for hver status',
+      (tester) async {
+    await tester.pumpWidget(wrap(const StatusBadge(status: SeasonStatus.open)));
+    expect(find.text('Åben'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester
+        .pumpWidget(wrap(const StatusBadge(status: SeasonStatus.closed)));
+    expect(find.text('Fredet'), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester
+        .pumpWidget(wrap(const StatusBadge(status: SeasonStatus.checkSize)));
+    expect(find.text('Tjek mål'), findsOneWidget);
   });
 }

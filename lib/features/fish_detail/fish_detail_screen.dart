@@ -18,6 +18,7 @@ class FishDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final fishAsync = ref.watch(fishByIdProvider(fishId));
     final zone = ref.watch(zoneProvider);
+    final dataUpdated = ref.watch(dataUpdatedProvider);
 
     return fishAsync.when(
       loading: () => const Scaffold(
@@ -30,7 +31,8 @@ class FishDetailScreen extends ConsumerWidget {
             body: Center(child: Text('Art ikke fundet.')),
           );
         }
-        return _DetailContent(fish: fish, zone: zone);
+        return _DetailContent(
+            fish: fish, zone: zone, dataUpdated: dataUpdated);
       },
     );
   }
@@ -39,8 +41,13 @@ class FishDetailScreen extends ConsumerWidget {
 class _DetailContent extends StatelessWidget {
   final Fish fish;
   final FishingZone zone;
+  final DateTime? dataUpdated;
 
-  const _DetailContent({required this.fish, required this.zone});
+  const _DetailContent({
+    required this.fish,
+    required this.zone,
+    required this.dataUpdated,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +89,8 @@ class _DetailContent extends StatelessWidget {
                   Text(fish.nameLatin,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontStyle: FontStyle.italic,
-                        color: theme.colorScheme.onSurface.withOpacity(0.6),
+                        color: theme.colorScheme.onSurface
+                            .withValues(alpha: 0.6),
                       )),
                   const SizedBox(height: 16),
                   _StatusBanner(result: result),
@@ -104,9 +112,12 @@ class _DetailContent extends StatelessWidget {
                   ],
                   const SizedBox(height: 24),
                   Text(
-                    'Kilde: lfst.dk · Saltvand 2026, Ferskvand 2025',
+                    dataUpdated != null
+                        ? 'Kilde: lfst.dk · Gældende pr. ${du.formatDanishDateWithYear(dataUpdated!)}'
+                        : 'Kilde: lfst.dk',
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.45),
+                      color:
+                          theme.colorScheme.onSurface.withValues(alpha: 0.45),
                     ),
                   ),
                 ],
@@ -194,18 +205,19 @@ class _InfoGrid extends StatelessWidget {
     final hasFresh = fish.environment.contains('fresh');
     final hasBoth = hasSalt && hasFresh;
 
-    final saltMin = switch (zone) {
-      FishingZone.nordsoen => fish.minimumSizeCm.nordsoen,
-      FishingZone.skagerrakKattegat => fish.minimumSizeCm.skagerrakKattegat,
-      FishingZone.baelterOestersoe => fish.minimumSizeCm.baelterOestersoe,
-      FishingZone.ferskvand => fish.minimumSizeCm.nordsoen ??
-          fish.minimumSizeCm.skagerrakKattegat ??
-          fish.minimumSizeCm.baelterOestersoe,
-    };
+    // Hvis brugeren står i ferskvandszonen men arten også findes i saltvand,
+    // vises et repræsentativt saltvandsmindstemål som fallback.
+    final saltMin = zone == FishingZone.ferskvand
+        ? fish.minimumSizeCm.nordsoen ??
+            fish.minimumSizeCm.skagerrakKattegat ??
+            fish.minimumSizeCm.baelterOestersoe
+        : minimumSizeForZone(fish, zone);
     final freshMin = fish.minimumSizeCm.ferskvand;
 
+    // Saltvand: alt der ikke udelukkende gælder ferskvand
+    // (inkl. zonespecifikke fredninger som fx 'bælter_østersø')
     final saltSeasons = fish.closedSeason
-        .where((cs) => cs.zone == 'salt' || cs.zone == 'all')
+        .where((cs) => cs.zone != 'ferskvand')
         .toList();
     final freshSeasons = fish.closedSeason
         .where((cs) => cs.zone == 'ferskvand' || cs.zone == 'all')
@@ -295,8 +307,9 @@ class _InfoRow extends StatelessWidget {
           SizedBox(
             width: 110,
             child: Text(label,
-                style: theme.textTheme.bodyMedium
-                    ?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.6))),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                    color:
+                        theme.colorScheme.onSurface.withValues(alpha: 0.6))),
           ),
           Expanded(
             child: Text(value,

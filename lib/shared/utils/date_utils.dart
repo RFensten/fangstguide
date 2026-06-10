@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 final _daMonthNames = [
   '', 'jan', 'feb', 'mar', 'apr', 'maj', 'jun',
   'jul', 'aug', 'sep', 'okt', 'nov', 'dec',
@@ -7,6 +5,9 @@ final _daMonthNames = [
 
 String formatDanishDate(DateTime date) =>
     '${date.day}. ${_daMonthNames[date.month]}';
+
+String formatDanishDateWithYear(DateTime date) =>
+    '${date.day}. ${_daMonthNames[date.month]} ${date.year}';
 
 String formatMonthDay(int month, int day) =>
     '$day. ${_daMonthNames[month]}';

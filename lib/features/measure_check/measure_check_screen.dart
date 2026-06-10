@@ -83,14 +83,16 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
     super.dispose();
   }
 
+  Fish? get _selectedFish {
+    for (final f in widget.fishList) {
+      if (f.id == _selectedId) return f;
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final fish = _selectedId != null
-        ? widget.fishList.firstWhere(
-            (f) => f.id == _selectedId,
-            orElse: () => widget.fishList.first,
-          )
-        : null;
+    final fish = _selectedFish;
 
     final length =
         double.tryParse(_lengthController.text.replaceAll(',', '.'));
@@ -101,7 +103,7 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DropdownButtonFormField<String>(
-            value: _selectedId,
+            initialValue: _selectedId,
             decoration: const InputDecoration(
               labelText: 'Vælg art',
               border: OutlineInputBorder(),
@@ -121,7 +123,7 @@ class _MeasureFormState extends ConsumerState<_MeasureForm> {
           ],
           const SizedBox(height: 16),
           DropdownButtonFormField<FishingZone>(
-            value: _localZone,
+            initialValue: _localZone,
             decoration: const InputDecoration(
               labelText: 'Zone',
               border: OutlineInputBorder(),
@@ -230,55 +232,41 @@ class _ResultBox extends StatelessWidget {
       );
     }
 
-    final result = checkSeason(fish!, zone, DateTime.now());
+    final now = DateTime.now();
+    final result = checkMeasure(fish!, zone, now, length!);
 
-    if (result.status == SeasonStatus.closed) {
-      final reopensText = result.reopensOn != null
-          ? ' — åbner ${du.formatDanishDate(result.reopensOn!)}'
-          : '';
-      return _resultContainer(
-        context,
-        color: const Color(0xFFFFEBEE),
-        textColor: const Color(0xFFC62828),
-        icon: Icons.do_not_disturb_outlined,
-        message: 'Sæson lukket$reopensText — genudsæt',
-      );
-    }
-
-    final minSize = switch (zone) {
-      FishingZone.nordsoen => fish!.minimumSizeCm.nordsoen,
-      FishingZone.skagerrakKattegat => fish!.minimumSizeCm.skagerrakKattegat,
-      FishingZone.baelterOestersoe => fish!.minimumSizeCm.baelterOestersoe,
-      FishingZone.ferskvand => fish!.minimumSizeCm.ferskvand,
-    };
-
-    if (minSize == null || minSize == 0) {
-      return _resultContainer(
-        context,
-        color: const Color(0xFFE8F5E9),
-        textColor: const Color(0xFF2E7D32),
-        icon: Icons.check_circle_outline,
-        message: 'Lovlig ✓ — tag den med hjem',
-      );
-    }
-
-    if (length! >= minSize) {
-      return _resultContainer(
-        context,
-        color: const Color(0xFFE8F5E9),
-        textColor: const Color(0xFF2E7D32),
-        icon: Icons.check_circle_outline,
-        message: 'Lovlig ✓ — tag den med hjem',
-      );
-    } else {
-      final missing = (minSize - length!).toStringAsFixed(1);
-      return _resultContainer(
-        context,
-        color: const Color(0xFFFFEBEE),
-        textColor: const Color(0xFFC62828),
-        icon: Icons.cancel_outlined,
-        message: 'For lille — genudsæt. Mangler: $missing cm',
-      );
+    switch (result) {
+      case MeasureResult.closedSeason:
+        final reopensOn = checkSeason(fish!, zone, now).reopensOn;
+        final reopensText = reopensOn != null
+            ? ' — åbner ${du.formatDanishDate(reopensOn)}'
+            : '';
+        return _resultContainer(
+          context,
+          color: const Color(0xFFFFEBEE),
+          textColor: const Color(0xFFC62828),
+          icon: Icons.do_not_disturb_outlined,
+          message: 'Sæson lukket$reopensText — genudsæt',
+        );
+      case MeasureResult.legal:
+      case MeasureResult.noMinimumSize:
+        return _resultContainer(
+          context,
+          color: const Color(0xFFE8F5E9),
+          textColor: const Color(0xFF2E7D32),
+          icon: Icons.check_circle_outline,
+          message: 'Lovlig ✓ — tag den med hjem',
+        );
+      case MeasureResult.tooSmall:
+        final minSize = minimumSizeForZone(fish!, zone)!;
+        final missing = (minSize - length!).toStringAsFixed(1);
+        return _resultContainer(
+          context,
+          color: const Color(0xFFFFEBEE),
+          textColor: const Color(0xFFC62828),
+          icon: Icons.cancel_outlined,
+          message: 'For lille — genudsæt. Mangler: $missing cm',
+        );
     }
   }
 

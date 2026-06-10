@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../data/models/fish.dart';
 import '../../providers/premium_provider.dart';
-import '../../providers/zone_provider.dart';
-import '../../shared/utils/season_checker.dart';
 import '../../shared/widgets/fish_card.dart';
 import '../../shared/widgets/zone_selector.dart';
 import 'fish_list_provider.dart';
@@ -17,13 +16,14 @@ class FishListScreen extends ConsumerStatefulWidget {
 
 class _FishListScreenState extends ConsumerState<FishListScreen> {
   final _searchController = TextEditingController();
-  String _query = '';
 
   @override
   void initState() {
     super.initState();
+    // Gendan evt. tidligere søgning og hold provideren synkroniseret
+    _searchController.text = ref.read(searchQueryProvider);
     _searchController.addListener(() {
-      setState(() => _query = _searchController.text.toLowerCase().trim());
+      ref.read(searchQueryProvider.notifier).state = _searchController.text;
     });
   }
 
@@ -37,7 +37,7 @@ class _FishListScreenState extends ConsumerState<FishListScreen> {
   Widget build(BuildContext context) {
     final fishAsync = ref.watch(filteredFishProvider);
     final activeFilter = ref.watch(environmentFilterProvider);
-    final zone = ref.watch(zoneProvider);
+    final query = ref.watch(searchQueryProvider);
     final isPremium = ref.watch(premiumProvider).valueOrNull ?? false;
 
     return Scaffold(
@@ -67,7 +67,7 @@ class _FishListScreenState extends ConsumerState<FishListScreen> {
               decoration: InputDecoration(
                 hintText: 'Søg efter art...',
                 prefixIcon: const Icon(Icons.search),
-                suffixIcon: _query.isNotEmpty
+                suffixIcon: query.isNotEmpty
                     ? IconButton(
                         icon: const Icon(Icons.clear),
                         onPressed: () => _searchController.clear(),
@@ -87,23 +87,7 @@ class _FishListScreenState extends ConsumerState<FishListScreen> {
               loading: () =>
                   const Center(child: CircularProgressIndicator()),
               error: (e, _) => Center(child: Text('Fejl: $e')),
-              data: (fish) {
-                var displayed = fish;
-
-                if (activeFilter == EnvironmentFilter.closedNow) {
-                  displayed = displayed.where((f) {
-                    final result = checkSeason(f, zone, DateTime.now());
-                    return result.status == SeasonStatus.closed;
-                  }).toList();
-                }
-
-                if (_query.isNotEmpty) {
-                  displayed = displayed.where((f) =>
-                      f.nameDa.toLowerCase().contains(_query) ||
-                      f.nameLatin.toLowerCase().contains(_query),
-                  ).toList();
-                }
-
+              data: (displayed) {
                 if (displayed.isEmpty) {
                   return const Center(
                     child: Text('Ingen arter matcher søgningen.'),
@@ -135,7 +119,7 @@ class _FishListScreenState extends ConsumerState<FishListScreen> {
 }
 
 class _FishListItem extends StatelessWidget {
-  final dynamic fish;
+  final Fish fish;
   final bool locked;
   final VoidCallback onTap;
 

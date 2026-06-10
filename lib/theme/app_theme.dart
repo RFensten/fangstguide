@@ -20,10 +20,10 @@ final lightTheme = ThemeData(
     elevation: 0,
     scrolledUnderElevation: 1,
   ),
-  chipTheme: ChipThemeData(
-    shape: const StadiumBorder(),
+  chipTheme: const ChipThemeData(
+    shape: StadiumBorder(),
     side: BorderSide.none,
-    backgroundColor: const Color(0xFFE8EDF0),
+    backgroundColor: Color(0xFFE8EDF0),
   ),
 );
 
@@ -37,7 +37,7 @@ final darkTheme = ThemeData(
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
-      side: BorderSide(color: Colors.white.withOpacity(0.1)),
+      side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
     ),
   ),
   appBarTheme: const AppBarTheme(

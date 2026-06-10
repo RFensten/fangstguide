@@ -6,6 +6,7 @@ import '../../data/models/fish.dart';
 import '../../providers/premium_provider.dart';
 import '../../providers/zone_provider.dart';
 import '../../shared/utils/date_utils.dart' as du;
+import '../../shared/utils/season_checker.dart';
 import '../../shared/widgets/zone_selector.dart';
 
 class CalendarScreen extends ConsumerWidget {
@@ -62,10 +63,12 @@ class _MonthList extends StatelessWidget {
     final visibleMonths = isPremium ? months : months.take(1).toList();
 
     final items = <Widget>[];
+    var hasEvents = false;
 
     for (final month in visibleMonths) {
       final events = _eventsForMonth(fish, zone, month);
       if (events.isEmpty) continue;
+      hasEvents = true;
 
       items.add(
         Column(
@@ -88,13 +91,20 @@ class _MonthList extends StatelessWidget {
       );
     }
 
+    if (!hasEvents) {
+      items.add(Padding(
+        padding: const EdgeInsets.all(24),
+        child: Center(
+          child: Text(isPremium
+              ? 'Ingen fredningsperioder de næste 12 måneder.'
+              : 'Ingen fredningsperioder denne måned.'),
+        ),
+      ));
+    }
+
     // Gratis-brugere ser en upsell-banner efter den første måned
     if (!isPremium) {
       items.add(const _PremiumCalendarBanner());
-    }
-
-    if (items.isEmpty) {
-      return const Center(child: Text('Ingen fredningsperioder denne måned.'));
     }
 
     return ListView(
@@ -116,16 +126,14 @@ class _MonthList extends StatelessWidget {
           continue;
         }
 
-        final matchesZone = cs.zone == 'all' ||
-            cs.zone == zone.jsonKey ||
-            (cs.zone == 'salt' && zone != FishingZone.ferskvand);
-        if (!matchesZone) continue;
+        if (!zoneMatches(cs.zone, zone)) continue;
 
-        final openDate = DateTime(month.year, cs.endMonth, cs.endDay)
-            .add(const Duration(days: 1));
+        // day + 1 (ikke .add(Duration)) — undgår fejl ved sommertidsskift
+        final openDate = DateTime(month.year, cs.endMonth, cs.endDay + 1);
         if (openDate.month == month.month) {
           events.add(_CalendarEvent(
             fish: f,
+            date: openDate,
             label: 'Åbner ${du.formatDanishDate(openDate)}',
             isOpening: true,
           ));
@@ -136,6 +144,7 @@ class _MonthList extends StatelessWidget {
         if (closeDate.month == month.month) {
           events.add(_CalendarEvent(
             fish: f,
+            date: closeDate,
             label: 'Lukker ${du.formatDanishDate(closeDate)}',
             isOpening: false,
           ));
@@ -143,6 +152,7 @@ class _MonthList extends StatelessWidget {
       }
     }
 
+    events.sort((a, b) => a.date.compareTo(b.date));
     return events;
   }
 
@@ -207,11 +217,16 @@ class _PremiumCalendarBanner extends StatelessWidget {
 
 class _CalendarEvent {
   final Fish fish;
+  final DateTime date;
   final String label;
   final bool isOpening;
 
-  const _CalendarEvent(
-      {required this.fish, required this.label, required this.isOpening});
+  const _CalendarEvent({
+    required this.fish,
+    required this.date,
+    required this.label,
+    required this.isOpening,
+  });
 }
 
 class _EventTile extends StatelessWidget {

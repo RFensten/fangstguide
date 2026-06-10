@@ -13,7 +13,7 @@ class SeasonResult {
 }
 
 SeasonResult checkSeason(Fish fish, FishingZone zone, DateTime date) {
-  // Totalfredet: daily_limit == 0 and no open window (full-year closed season)
+  // Totalfredet: daily_limit == 0 eller helårsfredning i zonen
   final isTotallyProtected = _isTotallyProtected(fish, zone);
   if (isTotallyProtected) {
     return const SeasonResult(SeasonStatus.closed);
@@ -25,7 +25,7 @@ SeasonResult checkSeason(Fish fish, FishingZone zone, DateTime date) {
     return SeasonResult(SeasonStatus.closed, reopensOn: reopens);
   }
 
-  final minSize = _minimumSizeForZone(fish, zone);
+  final minSize = minimumSizeForZone(fish, zone);
   if (minSize != null && minSize > 0) {
     return const SeasonResult(SeasonStatus.checkSize);
   }
@@ -33,10 +33,12 @@ SeasonResult checkSeason(Fish fish, FishingZone zone, DateTime date) {
   return const SeasonResult(SeasonStatus.open);
 }
 
-// Returns true if the fish has a full-year closed season covering the given zone
+// Returns true if the fish is fully protected: daily_limit == 0,
+// or a full-year closed season covering the given zone.
 bool _isTotallyProtected(Fish fish, FishingZone zone) {
+  if (fish.dailyLimit == 0) return true;
   for (final cs in fish.closedSeason) {
-    if (!_zoneMatches(cs.zone, zone)) continue;
+    if (!zoneMatches(cs.zone, zone)) continue;
     if (cs.startMonth == 1 && cs.startDay == 1 &&
         cs.endMonth == 12 && cs.endDay == 31) {
       return true;
@@ -47,7 +49,7 @@ bool _isTotallyProtected(Fish fish, FishingZone zone) {
 
 bool _isInClosedSeason(Fish fish, FishingZone zone, DateTime date) {
   for (final cs in fish.closedSeason) {
-    if (!_zoneMatches(cs.zone, zone)) continue;
+    if (!zoneMatches(cs.zone, zone)) continue;
     if (_dateInRange(date, cs)) return true;
   }
   return false;
@@ -76,14 +78,14 @@ DateTime? _nextReopening(Fish fish, FishingZone zone, DateTime date) {
   DateTime? earliest;
 
   for (final cs in fish.closedSeason) {
-    if (!_zoneMatches(cs.zone, zone)) continue;
+    if (!zoneMatches(cs.zone, zone)) continue;
     if (!_dateInRange(date, cs)) continue;
 
-    DateTime candidate = DateTime(date.year, cs.endMonth, cs.endDay)
-        .add(const Duration(days: 1));
+    // Bemærk: day + 1 frem for .add(Duration(days: 1)) — sidstnævnte lægger
+    // 24 timer til og rammer én dag forkert hen over sommertidsskift.
+    DateTime candidate = DateTime(date.year, cs.endMonth, cs.endDay + 1);
     if (candidate.isBefore(date)) {
-      candidate = DateTime(date.year + 1, cs.endMonth, cs.endDay)
-          .add(const Duration(days: 1));
+      candidate = DateTime(date.year + 1, cs.endMonth, cs.endDay + 1);
     }
 
     if (earliest == null || candidate.isBefore(earliest)) {
@@ -94,7 +96,8 @@ DateTime? _nextReopening(Fish fish, FishingZone zone, DateTime date) {
   return earliest;
 }
 
-double? _minimumSizeForZone(Fish fish, FishingZone zone) =>
+/// Mindstemålet (cm) for [fish] i [zone], eller null hvis intet mindstemål.
+double? minimumSizeForZone(Fish fish, FishingZone zone) =>
     switch (zone) {
       FishingZone.nordsoen => fish.minimumSizeCm.nordsoen,
       FishingZone.skagerrakKattegat => fish.minimumSizeCm.skagerrakKattegat,
@@ -102,7 +105,9 @@ double? _minimumSizeForZone(Fish fish, FishingZone zone) =>
       FishingZone.ferskvand => fish.minimumSizeCm.ferskvand,
     };
 
-bool _zoneMatches(String csZone, FishingZone zone) {
+/// Om en fredningstids zonenøgle ([csZone]: "all" | "salt" | zone.jsonKey)
+/// gælder for den valgte [zone].
+bool zoneMatches(String csZone, FishingZone zone) {
   if (csZone == 'all') return true;
   if (csZone == 'salt') return zone != FishingZone.ferskvand;
   return csZone == zone.jsonKey;
@@ -116,7 +121,7 @@ MeasureResult checkMeasure(
   final season = checkSeason(fish, zone, date);
   if (season.status == SeasonStatus.closed) return MeasureResult.closedSeason;
 
-  final minSize = _minimumSizeForZone(fish, zone);
+  final minSize = minimumSizeForZone(fish, zone);
   if (minSize == null || minSize == 0) return MeasureResult.noMinimumSize;
   return lengthCm >= minSize ? MeasureResult.legal : MeasureResult.tooSmall;
 }

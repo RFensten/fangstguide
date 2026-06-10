@@ -186,6 +186,45 @@ void main() {
     });
   });
 
+  group('checkSeason — totalfredet via daily_limit = 0', () {
+    test('daily_limit 0 → altid closed, også uden helårsfredning', () {
+      final fish = _makeFish(dailyLimit: 0);
+      final result = checkSeason(fish, FishingZone.ferskvand, DateTime(2024, 6, 1));
+      expect(result.status, SeasonStatus.closed);
+      expect(result.reopensOn, isNull);
+    });
+  });
+
+  group('checkSeason — sommertidsskift (DST)', () {
+    test('genåbningsdato korrekt når fredning slutter på dagen for DST-skift', () {
+      // Sommertid slutter 27. okt 2024 i Danmark. Fredning slutter samme dag
+      // → genåbning skal være 28. okt, ikke 27. okt kl. 23.
+      final fish = _makeFish(closedSeason: [_cs(10, 1, 10, 27)]);
+      final result = checkSeason(fish, FishingZone.ferskvand, DateTime(2024, 10, 15));
+      expect(result.reopensOn, DateTime(2024, 10, 28));
+    });
+  });
+
+  group('zoneMatches', () {
+    test('"all" matcher alle zoner', () {
+      for (final z in FishingZone.values) {
+        expect(zoneMatches('all', z), isTrue);
+      }
+    });
+
+    test('"salt" matcher alle saltvandszoner, ikke ferskvand', () {
+      expect(zoneMatches('salt', FishingZone.nordsoen), isTrue);
+      expect(zoneMatches('salt', FishingZone.skagerrakKattegat), isTrue);
+      expect(zoneMatches('salt', FishingZone.baelterOestersoe), isTrue);
+      expect(zoneMatches('salt', FishingZone.ferskvand), isFalse);
+    });
+
+    test('zonespecifik nøgle matcher kun egen zone', () {
+      expect(zoneMatches('bælter_østersø', FishingZone.baelterOestersoe), isTrue);
+      expect(zoneMatches('bælter_østersø', FishingZone.nordsoen), isFalse);
+    });
+  });
+
   group('checkMeasure', () {
     test('over minimumsstørrelse og åben sæson → legal', () {
       final fish = _makeFish(minSizeFerskvand: 40);
